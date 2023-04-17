@@ -3,7 +3,7 @@ curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 echo -e "\e[36m Install nodejs\e[0m" 
 yum install nodejs -y
 echo -e "\e[36m add roboshop cart \e[0m" 
-cartadd roboshop
+useradd roboshop
 echo -e "\e[36m create app directory\e[0m" 
 mkdir /app 
 echo -e "\e[36m download cart module source code\e[0m" 
