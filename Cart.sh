@@ -14,13 +14,13 @@ unzip /tmp/cart.zip
 echo -e "\e[36m install npm\e[0m" 
 npm install 
  echo -e "\e[36m copy cart service file to /etc/systemd/system/cart.service\e[0m" 
- cp cart.service /etc/systemd/system/cart.service
+ sudo cp cart.service /etc/systemd/system/cart.service
  echo -e "\e[36m reload the cart service\e[0m" 
  systemctl daemon-reload
  systemctl enable cart 
 systemctl start cart
 echo -e "\e[36m copy mongodb repo file to the path /etc/yum.repos.d/mongo.repo\e[0m" 
-cp mongo.repo /etc/yum.repos.d/mongo.repo
+sudo cp mongo.repo /etc/yum.repos.d/mongo.repo
 echo -e "\e[36m Install mongodb shell\e[0m" 
 yum install mongodb-org-shell -y
 echo -e "\e[36m load mongodb schema\e[0m" 

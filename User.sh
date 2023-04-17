@@ -14,13 +14,13 @@ unzip /tmp/user.zip
 echo -e "\e[36m install npm\e[0m" 
 npm install 
  echo -e "\e[36m copy user service file to /etc/systemd/system/user.service\e[0m" 
- cp user.service /etc/systemd/system/user.service
+ sudo cp user.service /etc/systemd/system/user.service
  echo -e "\e[36m reload the user service\e[0m" 
  systemctl daemon-reload
  systemctl enable user 
 systemctl start user
 echo -e "\e[36m copy mongodb repo file to the path /etc/yum.repos.d/mongo.repo\e[0m" 
-cp mongo.repo /etc/yum.repos.d/mongo.repo
+sudo cp mongo.repo /etc/yum.repos.d/mongo.repo
 echo -e "\e[36m Install mongodb shell\e[0m" 
 yum install mongodb-org-shell -y
 echo -e "\e[36m load mongodb schema\e[0m" 
