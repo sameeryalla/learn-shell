@@ -19,9 +19,3 @@ npm install
  systemctl daemon-reload
  systemctl enable cart 
 systemctl start cart
-echo -e "\e[36m copy mongodb repo file to the path /etc/yum.repos.d/mongo.repo\e[0m" 
-sudo cp mongo.repo /etc/yum.repos.d/mongo.repo
-echo -e "\e[36m Install mongodb shell\e[0m" 
-yum install mongodb-org-shell -y
-echo -e "\e[36m load mongodb schema\e[0m" 
-mongo --host mongodb.sameerdevops.online </app/schema/cart.js
