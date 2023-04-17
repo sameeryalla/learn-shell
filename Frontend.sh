@@ -9,7 +9,7 @@ curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.z
 echo -e "\e[36m unzip downloaded html setup\e[0m" 
 cd /usr/share/nginx/html 
 unzip /tmp/frontend.zip
-echo -e "\e[36m cop roboshop config file\e[0m" 
+echo -e "\e[36m copy roboshop config file\e[0m" 
 cp roboshop.conf /etc/nginx/default.d/roboshop.conf
 echo -e "\e[36m restart nginx service\e[0m"  
 systemctl restart nginx
