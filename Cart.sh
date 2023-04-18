@@ -13,9 +13,10 @@ cd /app
 unzip /tmp/cart.zip
 echo -e "\e[36m install npm\e[0m" 
 npm install 
- echo -e "\e[36m copy cart service file to /etc/systemd/system/cart.service\e[0m" 
- sudo cp cart.service /etc/systemd/system/cart.service
- echo -e "\e[36m reload the cart service\e[0m" 
- systemctl daemon-reload
- systemctl enable cart 
+echo -e "\e[36m copy cart service file to /etc/systemd/system/cart.service\e[0m" 
+sudo cp /home/centos/learn-shell/cart.service /etc/systemd/system/cart.service
+echo -e "\e[36m reload the cart service\e[0m" 
+systemctl daemon-reload
+systemctl enable cart 
 systemctl start cart
+echo -e "\e[36m end of cart module installation \e[0m"

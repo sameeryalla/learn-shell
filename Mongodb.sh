@@ -1,5 +1,5 @@
 echo -e "\e[36m copy mongodb repo file to the path /etc/yum.repos.d/mongo.repo\e[0m" 
-cp mongo.repo /etc/yum.repos.d/mongo.repo
+cp /home/centos/learn-shell/mongo.repo /etc/yum.repos.d/mongo.repo
 echo -e "\e[36m Install mongodb\e[0m" 
 yum install mongodb-org -y
 echo -e "\e[36m enable and starting mongod service\e[0m" 

@@ -10,6 +10,6 @@ echo -e "\e[36m unzip downloaded html setup\e[0m"
 cd /usr/share/nginx/html 
 unzip /tmp/frontend.zip
 echo -e "\e[36m copy roboshop config file\e[0m" 
-cp roboshop.conf /etc/nginx/default.d/roboshop.conf
+sudo cp /home/centos/learn-shell/roboshop.conf /etc/nginx/default.d/roboshop.conf
 echo -e "\e[36m restart nginx service\e[0m"  
 systemctl restart nginx

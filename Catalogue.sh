@@ -13,11 +13,11 @@ cd /app
 unzip /tmp/catalogue.zip
 echo -e "\e[36m install npm\e[0m" 
 npm install 
- echo -e "\e[36m copy catalogue service file to /etc/systemd/system/catalogue.service\e[0m" 
- cp catalogue.service /etc/systemd/system/catalogue.service
- echo -e "\e[36m reload the catalogue service\e[0m" 
- systemctl daemon-reload
- systemctl enable catalogue 
+echo -e "\e[36m copy catalogue service file to /etc/systemd/system/catalogue.service\e[0m" 
+cp /home/centos/learn-shell/catalogue.service /etc/systemd/system/catalogue.service
+echo -e "\e[36m reload the catalogue service\e[0m" 
+systemctl daemon-reload
+systemctl enable catalogue 
 systemctl start catalogue
 echo -e "\e[36m copy mongodb repo file to the path /etc/yum.repos.d/mongo.repo\e[0m" 
 cp mongo.repo /etc/yum.repos.d/mongo.repo

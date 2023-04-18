@@ -14,14 +14,15 @@ unzip /tmp/user.zip
 echo -e "\e[36m install npm\e[0m" 
 npm install 
  echo -e "\e[36m copy user service file to /etc/systemd/system/user.service\e[0m" 
- sudo cp user.service /etc/systemd/system/user.service
+ sudo cp /home/centos/learn-shell/user.service /etc/systemd/system/user.service
  echo -e "\e[36m reload the user service\e[0m" 
  systemctl daemon-reload
  systemctl enable user 
 systemctl start user
 echo -e "\e[36m copy mongodb repo file to the path /etc/yum.repos.d/mongo.repo\e[0m" 
-sudo cp mongo.repo /etc/yum.repos.d/mongo.repo
+sudo cp /home/centos/learn-shell/mongo.repo /etc/yum.repos.d/mongo.repo
 echo -e "\e[36m Install mongodb shell\e[0m" 
 yum install mongodb-org-shell -y
 echo -e "\e[36m load mongodb schema\e[0m" 
 mongo --host mongodb.sameerdevops.online </app/schema/user.js
+echo -e "\e[36m end of user module installation \e[0m"
