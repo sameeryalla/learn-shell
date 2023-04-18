@@ -1,7 +1,9 @@
+source common.sh
+
 echo -e "\e[36m<<<<<< install go lang >>>>>>\e[0m"
 yum install golang -y
 echo -e "\e[36m<<<<<< add application user >>>>>>\e[0m"
-useradd roboshop
+useradd ${app_user}
 echo -e "\e[36m<<<<<< create app directory >>>>>>\e[0m"
 mkdir /app 
 echo -e "\e[36m<<<<<< Download the application code to created app directory >>>>>>\e[0m"

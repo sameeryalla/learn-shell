@@ -1,7 +1,9 @@
+source common.sh
+
 echo -e "\e[36m<<<<<< install python 3.6 >>>>>>\e[0m"
 yum install python36 gcc python3-devel -y
-echo -e "\e[36m<<<<<< useradd roboshop >>>>>>\e[0m"
-useradd roboshop
+echo -e "\e[36m<<<<<< useradd ${app_user} >>>>>>\e[0m"
+useradd ${app_user}
 echo -e "\e[36m<<<<<< setup an app directory >>>>>>\e[0m"
 mkdir /app
 echo -e "\e[36m<<<<<< download payment source and unzip files >>>>>>\e[0m"
