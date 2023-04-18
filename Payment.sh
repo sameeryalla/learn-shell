@@ -14,7 +14,7 @@ unzip /tmp/payment.zip
 echo -e "\e[36m<<<<<< download dependencies >>>>>>\e[0m"
 cd /app 
 pip3.6 install -r requirements.txt
-echo -e "\e[36m<<<<<< message >>>>>>\e[0m"
+echo -e "\e[36m<<<<<< copy payment service to systemd directory >>>>>>\e[0m"
 sudo cp /home/centos/learn-shell/payment.service /etc/systemd/system/payment.service
 echo -e "\e[36m<<<<<< load systemd >>>>>>\e[0m"
 systemctl daemon-reload

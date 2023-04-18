@@ -1,6 +1,7 @@
 script_path=$(dirname $0)
 source ${script_path}/common.sh
 
+
 echo -e "\e[36m<<<<<< download modeJ setup>>>>>>\e[0m" 
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 echo -e "\e[36m<<<<<< Install nodejs>>>>>>\e[0m" 
@@ -19,12 +20,13 @@ npm install
 echo -e "\e[36m<<<<<< copy catalogue service file to /etc/systemd/system/catalogue.service>>>>>>\e[0m" 
 cp ${script_path}/catalogue.service /etc/systemd/system/catalogue.service
 echo -e "\e[36m<<<<<< reload the catalogue service>>>>>>\e[0m" 
-systemctl daemon-reload
-systemctl enable catalogue 
-systemctl start catalogue
+sudo systemctl daemon-reload
+sudo systemctl enable catalogue 
+sudo systemctl start catalogue
 echo -e "\e[36m<<<<<< copy mongodb repo file to the path /etc/yum.repos.d/mongo.repo>>>>>>\e[0m" 
-cp mongo.repo /etc/yum.repos.d/mongo.repo
+cp ${script_path}/mongo.repo /etc/yum.repos.d/mongo.repo
 echo -e "\e[36m<<<<<< Install mongodb shell>>>>>>\e[0m" 
 yum install mongodb-org-shell -y
 echo -e "\e[36m<<<<<< load mongodb schema>>>>>>\e[0m" 
 mongo --host mongodb.sameerdevops.online </app/schema/catalogue.js
+echo -e "\e[36m<<<<<< Successfully done catalogue setup>>>>>>\e[0m" 
