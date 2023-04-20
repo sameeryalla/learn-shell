@@ -1,4 +1,8 @@
-source common.sh
+REALPATH=${realpath "$0"}
+script_path=$(dirname "$REALPATH")
+source ${script_path}/common.sh
+#password:roboshop123
+rabbitmq_app_password=$1
 
 echo -e "\e[36m<<<<<< install python 3.6 >>>>>>\e[0m"
 yum install python36 gcc python3-devel -y
@@ -15,7 +19,9 @@ echo -e "\e[36m<<<<<< download dependencies >>>>>>\e[0m"
 cd /app 
 pip3.6 install -r requirements.txt
 echo -e "\e[36m<<<<<< copy payment service to systemd directory >>>>>>\e[0m"
-sudo cp /home/centos/learn-shell/payment.service /etc/systemd/system/payment.service
+sed -i -e "S|rabbitmq_app_password|${rabbitmq_app_password}|" ${script_path}/payment.service
+#sudo cp /home/centos/learn-shell/payment.service /etc/systemd/system/payment.service
+sudo cp ${script_path}/payment.service /etc/systemd/system/payment.service
 echo -e "\e[36m<<<<<< load systemd >>>>>>\e[0m"
 systemctl daemon-reload
 echo -e "\e[36m<<<<<< start the service >>>>>>\e[0m"

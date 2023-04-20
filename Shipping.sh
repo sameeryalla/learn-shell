@@ -1,4 +1,13 @@
-source common.sh
+REALPATH=${realpath "$0"}
+script_path=$(dirname "$REALPATH")
+source ${script_path}/common.sh
+mysql_root_pwd=$1
+
+if [-z "$mysql_root_pwd"]; then
+   echo mysql root password input is missing
+   exit
+fi
+
 
 echo -e "\e[36m<<<<<< install java maven dependency>>>>>>\e[0m" 
 yum install maven -y
@@ -16,7 +25,7 @@ cd /app
 mvn clean package 
 mv target/shipping-1.0.jar shipping.jar 
 echo -e "\e[36m<<<<<< copy shipping service file to /etc/systemd/system/shipping.service>>>>>>\e[0m" 
-sudo cp /home/centos/learn-shell/shipping.service /etc/systemd/system/shipping.service
+cp ${script_path}/shipping.service /etc/systemd/system/shipping.service
 echo -e "\e[36m<<<<<< reload the shipping service>>>>>>\e[0m" 
 systemctl daemon-reload
 systemctl enable shipping 
@@ -24,7 +33,8 @@ systemctl start shipping
 echo -e "\e[36m<<<<<< install sql>>>>>>\e[0m" 
 yum install mysql -y
 echo -e "\e[36m<<<<<< load schema>>>>>>\e[0m" 
-mysql -h mysql.sameerdevops.online -uroot -pRoboShop@1 < /app/schema/shipping.sql 
+#mysql -h mysql.sameerdevops.online -uroot -pRoboShop@1 < /app/schema/shipping.sql 
+mysql -h mysql.sameerdevops.online -uroot -p${mysql_root_pwd} < /app/schema/shipping.sql
 echo -e "\e[36m<<<<<< restart the shipping service>>>>>>\e[0m"  
 systemctl restart shipping
 echo -e "\e[36m<<<<<< end of shipping module installation >>>>>>\e[0m"

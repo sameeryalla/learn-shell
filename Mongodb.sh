@@ -1,5 +1,10 @@
+REALPATH=${realpath "$0"}
+script_path=$(dirname "$REALPATH")
+source ${script_path}/common.sh
+
+
 echo -e "\e[36m<<<<<< copy mongodb repo file to the path /etc/yum.repos.d/mongo.repo>>>>>>\e[0m" 
-cp /home/centos/learn-shell/mongo.repo /etc/yum.repos.d/mongo.repo
+cp ${script_path}/mongo.repo /etc/yum.repos.d/mongo.repo
 echo -e "\e[36m<<<<<< Install mongodb>>>>>>\e[0m" 
 yum install mongodb-org -y
 echo -e "\e[36m<<<<<< enable and starting mongod service>>>>>>\e[0m" 

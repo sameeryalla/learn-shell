@@ -1,28 +1,11 @@
-script_path=$(dirname $0)
+REALPATH=${realpath "$0"}
+script_path=$(dirname "$REALPATH")
 source ${script_path}/common.sh
+component=catalogue
 
-
-echo -e "\e[36m<<<<<< download modeJ setup>>>>>>\e[0m" 
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash
-echo -e "\e[36m<<<<<< Install nodejs>>>>>>\e[0m" 
-yum install nodejs -y
-echo -e "\e[36m<<<<<< add roboshop user >>>>>>\e[0m" 
-useradd ${app_user}
-echo -e "\e[36m<<<<<< create app directory>>>>>>\e[0m" 
-mkdir /app 
-echo -e "\e[36m<<<<<< download catalogue source code>>>>>>\e[0m" 
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip 
-echo -e "\e[36m<<<<<< navigate to app folder and unzip catalogue source code>>>>>>\e[0m" 
-cd /app 
-unzip /tmp/catalogue.zip
-echo -e "\e[36m<<<<<< install npm>>>>>>\e[0m" 
-npm install 
-echo -e "\e[36m<<<<<< copy catalogue service file to /etc/systemd/system/catalogue.service>>>>>>\e[0m" 
-cp ${script_path}/catalogue.service /etc/systemd/system/catalogue.service
-echo -e "\e[36m<<<<<< reload the catalogue service>>>>>>\e[0m" 
-sudo systemctl daemon-reload
-sudo systemctl enable catalogue 
-sudo systemctl start catalogue
+echo -e "\e[36m<<<<<< setting up catalogue module through function using component variable>>>>>>\e[0m"
+#function declared in common.sh
+func_nodejs
 echo -e "\e[36m<<<<<< copy mongodb repo file to the path /etc/yum.repos.d/mongo.repo>>>>>>\e[0m" 
 cp ${script_path}/mongo.repo /etc/yum.repos.d/mongo.repo
 echo -e "\e[36m<<<<<< Install mongodb shell>>>>>>\e[0m" 

@@ -1,4 +1,6 @@
-source common.sh
+REALPATH=${realpath "$0"}
+script_path=$(dirname "$REALPATH")
+source ${script_path}/common.sh
 
 echo -e "\e[36m<<<<<< install go lang >>>>>>\e[0m"
 yum install golang -y
@@ -16,7 +18,8 @@ go mod init dispatch
 go get 
 go build
 echo -e "\e[36m<<<<<< move service file to default path >>>>>>\e[0m"
-sudo cp /home/centos/learn-shell/dispatch.service /etc/systemd/system/dispatch.service
+#sudo cp /home/centos/learn-shell/dispatch.service /etc/systemd/system/dispatch.service
+sudo cp ${script_path}/dispatch.service /etc/systemd/system/dispatch.service
 echo -e "\e[36m<<<<<< start systemd service >>>>>>\e[0m"
 systemctl daemon-reload
 echo -e "\e[36m<<<<<< Enable and start the dispatch service >>>>>>\e[0m"
