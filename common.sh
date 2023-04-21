@@ -31,7 +31,7 @@ func_app_prereq()
     fi
 
     func_print_head " create application directory"
-    rm -rf /app
+    rm -rf /app &>>${log_file}
     mkdir /app &>>${log_file}
     func_status_check $?
     func_print_head " download ${component} source code"
