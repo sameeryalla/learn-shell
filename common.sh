@@ -85,6 +85,7 @@ func_nodejs()
 {
 	func_print_head download modeJ setup
 	curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${log_file}
+	func_status_check $?
 	func_print_head Install nodejs
 	yum install nodejs -y &>>${log_file}
 	func_status_check $?
@@ -93,7 +94,6 @@ func_nodejs()
 	npm install &>${log_file}
 	func_status_check $?
 	func_schema_setup
-	func_status_check $?
 	func_systemd_setup
 }
 
@@ -110,12 +110,12 @@ func_java()
   cd /app
   mvn clean package &>${log_file}
   mv target/${component}-1.0.jar ${component}.jar &>>${log_file}
+  func_status_check $?
   func_systemd_setup
-  func_status_check $?
   func_schema_setup
-  func_status_check $?
   func_print_head " restart the ${component} service"
   systemctl restart ${component} &>>${log_file}
+  func_status_check $?
 }
 
 func_python()
@@ -123,7 +123,6 @@ func_python()
 	func_print_head " install python 3.6 "
 	yum install python36 gcc python3-devel -y &>>${log_file}
 	func_status_check $?
-	func_print_head " useradd ${app_user} "
 	func_app_prereq
 	func_print_head " download dependencies "
 	cd /app 
