@@ -1,15 +1,20 @@
-echo -e "\e[36m<<<<<< Install nginx>>>>>>\e[0m" 
+REALPATH=${realpath "$0"}
+script_path=$(dirname "$REALPATH")
+source ${script_path}/common.sh
+component=frontend
+
+func_print_head "Install nginx" 
 yum install nginx -y 
-echo -e "\e[36m<<<<<< enable nginx service>>>>>>\e[0m" 
+func_print_head "enable nginx service" 
 systemctl enable nginx
-echo -e "\e[36m<<<<<< remove existing nginx html code>>>>>>\e[0m" 
+func_print_head "remove existing nginx html code" 
 rm -rf /usr/share/nginx/html/* 
-echo -e "\e[36m<<<<<< get Roboshop html files for frontend>>>>>>\e[0m" 
-curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip 
-echo -e "\e[36m<<<<<< unzip downloaded html setup>>>>>>\e[0m" 
+func_print_head "get Roboshop html files for frontend" 
+curl -o /tmp/$component.zip https://roboshop-artifacts.s3.amazonaws.com/$component.zip 
+func_print_head "unzip downloaded html setup" 
 cd /usr/share/nginx/html 
 unzip /tmp/frontend.zip
-echo -e "\e[36m<<<<<< copy roboshop config file>>>>>>\e[0m" 
+func_print_head copy "roboshop config file" 
 sudo cp /home/centos/learn-shell/roboshop.conf /etc/nginx/default.d/roboshop.conf
-echo -e "\e[36m<<<<<< restart nginx service>>>>>>\e[0m"  
+func_print_head "restart nginx service"  
 systemctl restart nginx

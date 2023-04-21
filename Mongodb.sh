@@ -3,14 +3,14 @@ script_path=$(dirname "$REALPATH")
 source ${script_path}/common.sh
 
 
-echo -e "\e[36m<<<<<< copy mongodb repo file to the path /etc/yum.repos.d/mongo.repo>>>>>>\e[0m" 
+func_print_head " copy mongodb repo file to the path /etc/yum.repos.d/mongo.repo" 
 cp ${script_path}/mongo.repo /etc/yum.repos.d/mongo.repo
-echo -e "\e[36m<<<<<< Install mongodb>>>>>>\e[0m" 
+func_print_head " Install mongodb" 
 yum install mongodb-org -y
-echo -e "\e[36m<<<<<< enable and starting mongod service>>>>>>\e[0m" 
+func_print_head " enable and starting mongod service" 
 systemctl enable mongod 
 systemctl start mongod 
-echo -e "\e[36m<<<<<< need to modify the bind path 127.0.0.1 to 0.0.0.0 in /etc/mongod.conf >>>>>>\e[0m" 
+func_print_head " need to modify the bind path 127.0.0.1 to 0.0.0.0 in /etc/mongod.conf " 
 sed -i -e 's|127.0.0.1|0.0.0.0|g' /etc/mongod.conf
-echo -e "\e[36m<<<<<< restart mongod service>>>>>>\e[0m" 
+func_print_head " restart mongod service" 
 systemctl restart mongod

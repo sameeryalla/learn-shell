@@ -7,7 +7,7 @@ echo NAME=${NAME}
 
 #date value
 #DATE=2023-04-18
-DATE=${date +%F}
+DATE=$(date +%F)
 echo Todays date is ${DATE}
 
 ARTH=$((2-3*4/2))

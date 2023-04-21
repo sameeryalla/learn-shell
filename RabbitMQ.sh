@@ -4,19 +4,19 @@ if [-z "$rabbitmq_app_password"]; then
    exit
 fi
 
-echo -e "\e[36m<<<<<< Install erlang from source url>>>>>>\e[0m" 
+func_print_head " Install erlang from source url" 
 curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
 yum install erlang -y
-echo -e "\e[36m<<<<<< Configure YUM Repos for RabbitMQ>>>>>>\e[0m" 
+func_print_head " Configure YUM Repos for RabbitMQ" 
 curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
-echo -e "\e[36m<<<<<< Install RabbitMQ>>>>>>\e[0m"
+func_print_head " Install RabbitMQ"
 yum install rabbitmq-server -y 
-echo -e "\e[36m<<<<<< enable and starting RabbitMQ service>>>>>>\e[0m" 
+func_print_head " enable and starting RabbitMQ service" 
 systemctl enable rabbitmq-server 
 systemctl start rabbitmq-server  
-echo -e "\e[36m<<<<<< need to modify the bind path 127.0.0.1 to 0.0.0.0 in /etc/mongod.conf >>>>>>\e[0m" 
+func_print_head " need to modify the bind path 127.0.0.1 to 0.0.0.0 in /etc/mongod.conf " 
 #rabbitmqctl add_user roboshop roboshop123
 rabbitmqctl add_user roboshop ${rabbitmq_app_password}
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
-echo -e "\e[36m<<<<<< restarting RabbitMQ service>>>>>>\e[0m" 
+func_print_head " restarting RabbitMQ service" 
 systemctl restart rabbitmq-server 
