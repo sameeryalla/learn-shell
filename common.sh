@@ -46,6 +46,7 @@ func_app_prereq()
 
 func_systemd_setup()
 {
+  #sudo cp /home/centos/learn-shell/dispatch.service /etc/systemd/system/dispatch.service
   func_print_head " copy ${component} service file to /etc/systemd/system/${component}.service"
   cp ${script_path}/${component}.service /etc/systemd/system/${component}.service &>>${log_file}
   func_status_check $?
@@ -115,5 +116,23 @@ func_java()
   func_status_check $?
   func_print_head " restart the ${component} service"
   systemctl restart ${component} &>>${log_file}
+}
+
+func_python()
+{
+	func_print_head " install python 3.6 "
+	yum install python36 gcc python3-devel -y &>>${log_file}
+	func_status_check $?
+	func_print_head " useradd ${app_user} "
+	func_app_prereq
+	func_print_head " download dependencies "
+	cd /app 
+	pip3.6 install -r requirements.txt &>>${log_file}
+	func_status_check $?
+	func_print_head " copy ${component} service to systemd directory "
+	sed -i -e "S|rabbitmq_app_password|${rabbitmq_app_password}|" ${script_path}/${component}.service
+	func_status_check $?
+	func_systemd_setup
+	func_print_head " end of ${component} module installation "
 }
 
