@@ -4,7 +4,8 @@ log_file=/tmp/Roboshop.log
 
 func_print_head()
 {
-	echo -e "\e[36m>>>>>> $* <<<<<<<<<<\e[0m" 
+	echo -e "\e[36m>>>>>> $* <<<<<<<<<<\e[0m"
+	echo -e "\e[36m>>>>>> $* <<<<<<<<<<\e[0m" &>>${log_file}
 }
 
 
@@ -22,9 +23,13 @@ func_status_check()
 
 func_app_prereq()
 {
-    func_print_head " add ${app_user} user "
-    useradd ${app_user} &>>${log_file}
-    func_status_check $?
+    id ${app_user} &>>${log_file}
+    if [ $? -ne 0 ]; then
+       func_print_head " add ${app_user} user "
+           useradd ${app_user} &>>${log_file}
+           func_status_check $?
+    fi
+
     func_print_head " create application directory"
     rm -rf /app
     mkdir /app &>>${log_file}
