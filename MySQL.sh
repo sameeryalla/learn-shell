@@ -1,4 +1,4 @@
-REALPATH=${realpath "$0"}
+REALPATH=$(realpath "$0")
 script_path=$(dirname "$REALPATH")
 source ${script_path}/common.sh
 mysql_root_password=$1
