@@ -23,7 +23,7 @@ systemctl enable mysqld
 systemctl start mysqld &>>${log_file}
 func_status_check $?
 func_print_head " We need to change the default root password in order to start using the database service "
-mysql_secure_installation --set-root-pass mysql_root_password &>>${log_file}
+sudo mysql_secure_installation --set-root-pass mysql_root_password &>>${log_file}
 func_status_check $?
 func_print_head " restart mysqld service"
 systemctl restart mysqld &>>${log_file}
