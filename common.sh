@@ -83,7 +83,7 @@ func_schema_setup()
 
 func_nodejs()
 {
-	func_print_head download modeJ setup
+	func_print_head download nodeJ setup
 	curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${log_file}
 	func_status_check $?
 	func_print_head Install nodejs
