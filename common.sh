@@ -67,8 +67,7 @@ func_schema_setup()
       yum install mongodb-org-shell -y &>>${log_file}
       func_status_check $?
       func_print_head load mongodb schema
-      #mongo --host mongodb.sameerdevops.online </app/schema/${component}.js &>>${log_file}
-      mongo --host 172.31.27.14 </app/schema/${component}.js &>>${log_file}
+      mongo --host mongodb.sameerdevops.online </app/schema/${component}.js &>>${log_file}
       func_status_check $?
       elif [ "$schema_setup" == "mysql" ]; then
           func_print_head " install sql"
