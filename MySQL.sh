@@ -5,7 +5,7 @@ mysql_root_pwd=$1
 
 if [ -z "$mysql_root_pwd" ];then
   echo missing root password input
-  exit
+  exit 1
 fi
 
 func_print_head " lets disable MySQL 8 version."
