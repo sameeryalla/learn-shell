@@ -94,8 +94,9 @@ func_nodejs()
 	func_print_head "install npm"
 	npm install &>${log_file}
 	func_status_check $?
-	func_schema_setup
 	func_systemd_setup
+	func_schema_setup
+
 }
 
 
