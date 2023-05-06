@@ -132,7 +132,7 @@ func_python()
 	func_status_check $?
 	func_print_head " copy ${component} service to systemd directory "
     cp ${script_path}/${component}.service /etc/systemd/system/${component}.service &>>${log_file}
- 	sed -i -e "S|rabbitmq_app_password|${rabbitmq_app_password}|" /etc/systemd/system/${component}.service
+ 	sed -i -e "s|rabbitmq_app_password|${rabbitmq_app_password}|" /etc/systemd/system/${component}.service
 	func_status_check $?
 	func_systemd_setup
 	func_print_head " end of ${component} module installation "
