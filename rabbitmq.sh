@@ -1,3 +1,7 @@
+REALPATH=$(realpath "$0")
+script_path=$(dirname "$REALPATH")
+source ${script_path}/common.sh
+
 rabbitmq_app_password=$1
 if [ -z "$rabbitmq_app_password" ]; then
    echo rabbitmq app password input is missing
